@@ -1,0 +1,11 @@
+{
+    "name": "alexsnowb/ydpbot",
+    "type": "project",
+    "require": {
+        "php": ">=7.3",
+        "longman/telegram-bot": "*",
+        "symfony/dotenv": "^5.3",
+      "ext-curl": "*",
+        "ext-json": "*"
+    }
+}
