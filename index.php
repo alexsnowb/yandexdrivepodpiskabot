@@ -8,7 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = new Dotenv();
 try {
-    $dotenv->load(__DIR__.'/.env');
+    $dotenv->load(__DIR__ . '/.env');
 } catch (Exception $exception) {
     error_log($exception->getMessage());
 }
@@ -68,9 +68,20 @@ try {
 
 
 $text = '';
+$list = [];
+
 foreach ($result['offers'] as $key => $value) {
-    $text .= '🚗 '.$value['name'].' '.$value['subname'].PHP_EOL;
+    $list[$key]['weekly_cost'] = $value['weekly_cost'];
+    $list[$key]['text'] = '🚗 ' . $value['name'] . ' ' . $value['subname'] . PHP_EOL;
 }
+
+usort($list, function($a, $b) {
+    return $a['weekly_cost'] <=> $b['weekly_cost'];
+});
+foreach ($list as $value) {
+    $text .= $value['text'];
+}
+
 
 $ttt = Request::sendMessage([
     'chat_id' => $_ENV['BOT_CHAT_ID'],
